@@ -8,13 +8,12 @@ public abstract class Conta {
 	private Double saldo;
 	private Cliente titular;
 	
-	List<Transacao> historico;
+	List<Transacao> historico = new ArrayList<>();
 
 	public Conta(Integer numero, Cliente titular) {
 		this.numero = numero;
 		this.saldo = 0.00;
 		this.titular = titular;
-		this.historico = new ArrayList<>();
 	}
 
 	public Integer getNumero() {
@@ -36,23 +35,32 @@ public abstract class Conta {
 	public void setTitular(Cliente titular) {
 		this.titular = titular;
 	}
-
-	public abstract void depositar(Double valor);
-	
-	public abstract void sacar(Double Valor);
-	
-	public void transferir(Double Valor, Conta contaDestino)
-	{
-		this.sacar(Valor);
-		contaDestino.depositar(Valor);
-	}
-	
-	public abstract Double calcularTarifa();
 	
 	public List<Transacao> getHistorico()
 	{
 		return historico;
 	}
+
+	public void depositar(Double valor)
+	{
+		this.saldo = this.getSaldo() + valor;
+	}
+	
+	protected void creditar(Double valor)
+	{
+		this.saldo += valor;
+	}
+	
+	protected void debitar(Double valor)
+	{
+		this.saldo -= valor;
+	}
+	
+	public abstract void sacar(Double valor);
+	
+	public abstract void transferir(Double valor, Conta contaDestino);
+	
+	public abstract Double calcularTarifa(Double valor);
 
 	
 }
