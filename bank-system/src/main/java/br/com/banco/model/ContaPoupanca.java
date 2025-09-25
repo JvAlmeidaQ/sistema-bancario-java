@@ -1,17 +1,14 @@
 package br.com.banco.model;
 
-import java.util.List;
-
 import br.com.banco.exceptions.SaldoInsuficienteException;
 
 public class ContaPoupanca extends Conta {
 	
-	private Double taxaJurosMensal;
+	private static final Double TAXA_JUROS_MENSAL = 0.0125;
 	
-	public ContaPoupanca(Integer numero, Cliente titular, Double taxaJurosMensal ) 
+	public ContaPoupanca(Integer numero, Cliente titular ) 
 	{
 		super(numero, titular);
-		this.taxaJurosMensal = taxaJurosMensal;
 	}
 
 	@Override
@@ -42,7 +39,7 @@ public class ContaPoupanca extends Conta {
 	
 	public void aplicarJuros()
 	{
-		Double valorComJuros = this.getSaldo() * this.taxaJurosMensal;
+		Double valorComJuros = this.getSaldo() * TAXA_JUROS_MENSAL;
 		this.creditar(valorComJuros);
 	}
 

@@ -8,11 +8,29 @@ public class ContaCorrente extends Conta
 	
 	private Double limiteChequeEspecial;
 
-	public ContaCorrente(Integer numero, Cliente titular, Double limiteChequeEspecial) {
+	public ContaCorrente(Integer numero, Cliente titular) {
 		super(numero, titular);
-		this.limiteChequeEspecial = limiteChequeEspecial;
+		this.limiteChequeEspecial = calcularLimiteChequeEspecial();
 	}
+	
+	private double calcularLimiteChequeEspecial() 
+	{
+        double limite = getSaldo() * 0.3;
 
+        if (limite < 500) {
+            limite = 500;
+        } else if (limite > 5000) {
+            limite = 5000;
+        }
+
+        return limite;
+    }
+	
+	public double getLimiteChequeEspecial() 
+	{
+        return limiteChequeEspecial;
+    }
+	
 	@Override
 	public void sacar(Double valor) 
 	{
