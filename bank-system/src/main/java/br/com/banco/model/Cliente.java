@@ -18,6 +18,15 @@ public class Cliente {
 		this.senhaHash = hash;
 	}
 
+	
+	public Cliente(Integer id, String nome, String cpf) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

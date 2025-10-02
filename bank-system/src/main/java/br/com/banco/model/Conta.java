@@ -15,6 +15,17 @@ public abstract class Conta {
 		this.saldo = 0.00;
 		this.titular = titular;
 	}
+	
+	
+
+	public Conta(Integer numero, Double saldo, Cliente titular) {
+		super();
+		this.numero = numero;
+		this.saldo = saldo;
+		this.titular = titular;
+	}
+
+
 
 	public Integer getNumero() {
 		return numero;
@@ -54,6 +65,11 @@ public abstract class Conta {
 	protected void debitar(Double valor)
 	{
 		this.saldo -= valor;
+	}
+	
+	protected void restaurarSaldo(Double valor)
+	{
+		saldo = valor;
 	}
 	
 	public abstract void sacar(Double valor);

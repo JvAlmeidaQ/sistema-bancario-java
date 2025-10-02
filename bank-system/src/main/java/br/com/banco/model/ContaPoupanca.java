@@ -10,6 +10,16 @@ public class ContaPoupanca extends Conta {
 	{
 		super(numero, titular);
 	}
+	
+	
+
+	public ContaPoupanca(Integer numero, Double saldo, Cliente titular) 
+	{
+		super(numero, saldo, titular);
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	@Override
 	public void sacar(Double valor)

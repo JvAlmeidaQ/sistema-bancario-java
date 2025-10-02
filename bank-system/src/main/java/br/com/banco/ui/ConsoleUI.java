@@ -1,4 +1,4 @@
-package br.com.banco.ut;
+package br.com.banco.ui;
 
 public class ConsoleUI {
 

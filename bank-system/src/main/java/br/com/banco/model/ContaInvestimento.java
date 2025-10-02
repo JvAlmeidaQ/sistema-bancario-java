@@ -8,6 +8,16 @@ public class ContaInvestimento extends Conta {
 		super(numero, titular);
 	}
 
+	
+	
+	public ContaInvestimento(Integer numero, Double saldo, Cliente titular)
+	{
+		super(numero, saldo, titular);
+		// TODO Auto-generated constructor stub
+	}
+
+
+
 	@Override
 	public void sacar(Double valor) {
 	    throw new UnsupportedOperationException("Saques diretos não são permitidos em Conta Investimento. Utilize a transferência (resgate).");

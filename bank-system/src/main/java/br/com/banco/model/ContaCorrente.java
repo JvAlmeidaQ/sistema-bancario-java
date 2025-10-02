@@ -13,6 +13,11 @@ public class ContaCorrente extends Conta
 		this.limiteChequeEspecial = calcularLimiteChequeEspecial();
 	}
 	
+	public ContaCorrente(Integer numero, Double saldo, Cliente titular)
+	{
+		super(numero, saldo, titular);
+	}
+
 	private double calcularLimiteChequeEspecial() 
 	{
         double limite = getSaldo() * 0.3;
