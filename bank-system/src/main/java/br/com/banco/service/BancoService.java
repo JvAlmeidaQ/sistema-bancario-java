@@ -1,6 +1,7 @@
 package br.com.banco.service;
 
 import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import br.com.banco.model.ContaCorrente;
 import br.com.banco.model.ContaInvestimento;
 import br.com.banco.model.ContaPoupanca;
 import br.com.banco.model.TipoConta;
+import  br.com.banco.util.IdGenerator;
 
 public class BancoService {
 	
@@ -24,7 +26,7 @@ public class BancoService {
 		if(clientes.containsKey(cpf))
 			throw new AutenticacaoException("CPF já cadastrado");
 		
-		clientes.put(cpf, new Cliente(100,nome ,cpf ,senha ));
+		clientes.put(cpf, new Cliente(IdGenerator.geraId(),nome ,cpf ,senha ));
 	}
 	
 	public void criarConta(Cliente cliente, TipoConta tipoConta)

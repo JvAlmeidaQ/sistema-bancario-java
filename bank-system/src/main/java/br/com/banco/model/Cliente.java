@@ -3,6 +3,8 @@ package br.com.banco.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.banco.util.IdGenerator;
+
 public class Cliente {
 	private Integer id;
 	private String nome;
@@ -31,8 +33,8 @@ public class Cliente {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId() {
+		this.id = IdGenerator.geraId();
 	}
 
 	public String getNome() {
