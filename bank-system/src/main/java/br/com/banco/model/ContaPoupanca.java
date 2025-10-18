@@ -25,7 +25,11 @@ public class ContaPoupanca extends Conta {
 	public void sacar(Double valor)
 	{
 		if(valor <= this.getSaldo())
+		{
 			debitar(valor);
+			Transacao transacao = new Transacao(valor, TipoTransacao.SAQUE, this, null);
+			historico.add(transacao);
+		}
 		else
 			throw new SaldoInsuficienteException("Saldo Insuficiente");
 	}
@@ -42,9 +46,15 @@ public class ContaPoupanca extends Conta {
 	        throw new IllegalArgumentException("Transferências da poupança só são permitidas para uma Conta Corrente.");
 	    }
 		
-		this.sacar(valor);
-		contaDestino.debitar(valor);
-		
+		if(valor <= this.getSaldo())
+		{
+			this.debitar(valor);
+			contaDestino.depositar(valor);
+			Transacao transacao = new Transacao(valor, TipoTransacao.TRANFERENCIA, this, contaDestino);
+			historico.add(transacao);
+		}
+		else
+			throw new SaldoInsuficienteException("Saldo Insuficiente");
 	}
 	
 	public void aplicarJuros()

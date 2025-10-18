@@ -55,6 +55,8 @@ public abstract class Conta {
 	public void depositar(Double valor)
 	{
 		this.saldo = this.getSaldo() + valor;
+		Transacao transacao = new Transacao(valor, TipoTransacao.DEPOSITO, null, this);
+		historico.add(transacao);
 	}
 	
 	protected void creditar(Double valor)

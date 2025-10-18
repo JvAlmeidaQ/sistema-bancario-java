@@ -1,18 +1,24 @@
 package br.com.banco.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import br.com.banco.util.DateTimeUtil;
+import br.com.banco.util.IdGenerator;
 
 public class Transacao {
 	private Integer id;
-	private LocalDate dataHora;
+	private LocalDateTime dataHora;
 	private Double valor;
+	private TipoTransacao tipo;
 	private Conta contaOrigem;
 	private Conta contaDestino;
 	
-	public Transacao(Integer id, LocalDate dataHora, Double valor, Conta contaOrigem, Conta contaDestino) {
-		this.id = id;
-		this.dataHora = dataHora;
+	public Transacao(Double valor, TipoTransacao tipo, Conta contaOrigem, Conta contaDestino) {
+		this.id = IdGenerator.geraId();
+		this.dataHora = DateTimeUtil.dataAtual();
 		this.valor = valor;
+		this.tipo = tipo;
 		this.contaOrigem = contaOrigem;
 		this.contaDestino = contaDestino;
 	}
@@ -21,40 +27,20 @@ public class Transacao {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public LocalDate getDataHora() {
+	public LocalDateTime getDataHora() {
 		return dataHora;
-	}
-
-	public void setDataHora(LocalDate dataHora) {
-		this.dataHora = dataHora;
 	}
 
 	public Double getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
-
 	public Conta getContaOrigem() {
 		return contaOrigem;
 	}
 
-	public void setContaOrigem(Conta contaOrigem) {
-		this.contaOrigem = contaOrigem;
-	}
-
 	public Conta getContaDestino() {
 		return contaDestino;
-	}
-
-	public void setContaDestino(Conta contaDestino) {
-		this.contaDestino = contaDestino;
 	}
 
 	@Override

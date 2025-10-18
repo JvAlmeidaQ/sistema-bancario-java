@@ -2,7 +2,7 @@ package br.com.banco.model;
 
 import br.com.banco.exceptions.SaldoInsuficienteException;
 
-public class ContaCorrente extends Conta 
+public class ContaCorrente extends Conta implements Tributavel
 {
 	private static final Double TAXA = 0.01;
 	
@@ -42,21 +42,40 @@ public class ContaCorrente extends Conta
 		Double valorComTaxa = valor + this.calcularTarifa(valor);
 		
 		if(valorComTaxa <= this.getSaldo() + limiteChequeEspecial)
-			debitar(valorComTaxa);
+		{
+			this.debitar(valorComTaxa);
+			Transacao transacao = new Transacao(valorComTaxa, TipoTransacao.SAQUE, this, null);
+			historico.add(transacao);
+		}
 		else
 			throw new SaldoInsuficienteException("Saldo Insuficiente");
 	}
 
 	@Override
 	public void transferir(Double valor, Conta contaDestino) {
-		this.sacar(valor);
-		contaDestino.depositar(valor);
 		
+		Double valorComTaxa = valor + this.calcularTarifa(valor);
+		
+		if(valorComTaxa <= this.getSaldo() + limiteChequeEspecial)
+		{
+			this.debitar(valorComTaxa);
+			contaDestino.depositar(valor);
+			Transacao transacao = new Transacao(valor, TipoTransacao.TRANFERENCIA, this, contaDestino);
+			historico.add(transacao);
+		}
+		else
+			throw new SaldoInsuficienteException("Saldo Insuficiente");
 	}
 
 	@Override
 	public Double calcularTarifa(Double valor) {
 		return valor * TAXA;
+	}
+
+	@Override
+	public Double calcularImpostos() {
+		// TODO Auto-generated method stub
+		return this.getSaldo()*TAXA;
 	}
 	
 }
